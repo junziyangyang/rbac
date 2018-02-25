@@ -3,7 +3,7 @@ const schema = mongoose.Schema;
 const objectId = schema.Types.ObjectId;
 const moment = require('moment');
 
-const AccessSchema = ({
+const AccessSchema = new schema({
     title: String,     // 权限名称
     urls: {type: Number, default: 1},      //json 数组
     status: String,      //'状态 1：有效 0：无效'

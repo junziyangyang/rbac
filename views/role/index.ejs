@@ -1,0 +1,97 @@
+<div class="layui-fluid">
+    <blockquote class="layui-elem-quote">
+        <div class="layui-row">
+            <div class="layui-col-md11">
+                <span class="layui-breadcrumb">
+                  <a href="/">首页</a>
+                  <a><cite>角色管理</cite></a>
+                </span>
+            </div>
+            <div class="layui-col-md1">
+                <button class="layui-btn" onclick="javascript:window.location.href='/role/add'">
+                    <i class="layui-icon">&#xe608;</i> 添加
+                </button>
+            </div>
+        </div>
+    </blockquote>
+    <table id="role" lay-filter="role"></table>
+</div>
+
+<script type="text/html" id="statusTpl">
+    {{#  if(d.status == 0 ){ }}
+    无效
+    {{#  } else { }}
+    有效
+    {{#  } }}
+</script>
+
+<script type="text/html" id="toolsTpl">
+    <div class="layui-btn-group">
+        <button class="layui-btn layui-btn-sm" lay-event="edit">
+            <i class="layui-icon">&#xe642;</i>
+        </button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete">
+            <i class="layui-icon">&#xe640;</i>
+        </button>
+    </div>
+</script>
+
+<script>
+    layui.use(['table', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery;
+
+        //第一个实例
+        table.render({
+            elem: '#role'
+            , height: 315
+            , url: '/role/list' //数据接口
+            , page: true //开启分页
+            , even: true //开启隔行背景
+            , cols: [[ //表头
+                {field: 'name', title: '用户名', width: 200}
+                , {field: 'status', title: '状态', width: 100, sort: true, templet: '#statusTpl'}
+                , {field: 'created_time', title: '创建时间', sort: true}
+                , {fixed: 'right', width: 150, align: 'center', toolbar: '#toolsTpl'}
+            ]]
+        });
+
+        table.on('tool(role)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            console.log(obj)
+            if (layEvent === 'delete') { //删除
+                layer.confirm('真的删除此角色么', {title: "提示"}, function (index) {
+                    //向服务端发送删除指令
+                    $.ajax({
+                        url: '/role/delete',
+                        type: 'post',
+                        data: {
+                            role_id: obj.data._id
+                        }, success: function (data) {
+                            if (data.result = "success") {
+                                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                layer.close(index);
+                                layer.msg('删除成功', {title: "提示", icon: 1})
+                            }
+                        }, error: function (err) {
+
+                        }
+                    })
+                });
+            } else if (layEvent === 'edit') { //编辑
+                //do something
+                location.href = '/role/update/' + obj.data._id;
+
+                //同步更新缓存对应的值
+                // obj.update({
+                //     username: '123'
+                //     , title: 'xxx'
+                // });
+            }
+        });
+    });
+</script>
+

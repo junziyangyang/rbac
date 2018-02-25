@@ -3,7 +3,7 @@ const schema = mongoose.Schema;
 const objectId = schema.Types.ObjectId;
 const moment = require('moment');
 
-const RoleAccessSchema = ({
+const RoleAccessSchema = new schema({
     access_id: {type: objectId, ref: "User"},     // 权限id
     role_id: {type: objectId, ref: "Role"},      //角色id
     created_time: {type: Date, default: '0000-00-00 00:00:00'}      //插入时间

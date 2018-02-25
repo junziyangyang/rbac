@@ -1,0 +1,110 @@
+<div class="layui-fluid">
+    <blockquote class="layui-elem-quote">
+        <div class="layui-row">
+            <div class="layui-col-md11">
+                <span class="layui-breadcrumb">
+                  <i class="layui-icon">&#xe68e</i>
+                  <a href="/">首页 </a>
+                  <a href="/user">用户管理</a>
+                  <a><cite>用户添加</cite></a>
+                </span>
+            </div>
+            <div class="layui-col-md1">
+                <button class="layui-btn" onclick="javascript:history.back(-1);">
+                    <i class="layui-icon">&#xe65c;</i> 返回
+                </button>
+            </div>
+        </div>
+    </blockquote>
+    <div class="layui-elem-field">
+        <form class="layui-form" action="" style="padding-top: 20px">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="user[name]" required lay-verify="required" placeholder="请输入用户名"
+                           autocomplete="off" class="layui-input" value="<%=user.name %>">
+                </div>
+                <div class="layui-form-mid layui-word-aux">*必填项</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="user[email]" required lay-verify="email" placeholder="请输入邮箱"
+                           autocomplete="off" class="layui-input" value="<%=user.email %>">
+                </div>
+                <div class="layui-form-mid layui-word-aux">*必填项</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="user[sex]" value="0" title="女" <% if (user.sex == 0){ %> checked <% } %>>
+                    <input type="radio" name="user[sex]" value="1" title="男" <% if (user.sex == 1){ %> checked <% } %>>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否管理员</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="user[is_admin]" value="0" title="否" <% if (user.is_admin == 0){ %> checked <% } %>>
+                    <input type="radio" name="user[is_admin]" value="1" title="是" <% if (user.is_admin == 1){ %> checked <% } %>>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否有效</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="user[status]" value="0" title="否" <% if (user.status == 0){ %> checked <% } %>>
+                    <input type="radio" name="user[status]" value="1" title="是" <% if (user.status == 1){ %> checked <% } %>>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属角色</label>
+                <div class="layui-input-inline">
+                    <select name="role_id" lay-verify="required">
+                        <option value="">选择所属角色</option>
+                        <% roles.forEach(function(role){ %>
+                        <option value="<%= role._id %>"><%= role.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" name="user[_id]" class="layui-input" value="<%= user._id %>">
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                </div>
+            </div>
+        </form>
+        <input type="hidden" id="role_id" class="layui-input" value="<%= role_id %>">
+    </div>
+</div>
+<script>
+    layui.use(['form', 'jquery'], function () {
+        var form = layui.form;
+        var $ = layui.jquery;
+
+        $('select[name="role_id"]').val($('#role_id').val());
+        form.render('select')
+
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            console.log(JSON.stringify(data.field));
+            $.ajax({
+                url: '/user/save',
+                type: "post",
+                data: data.field,
+                success: function (data) {
+                    if (data.result == "success") {
+                        layer.msg("保存成功", {title: "提示", icon: 1});
+                    } else {
+                        layer.msg(data.msg, {title: "提示", icon: 2});
+                    }
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
+

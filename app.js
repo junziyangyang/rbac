@@ -5,10 +5,16 @@ const json = require('koa-json');
 const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
+const render = require('koa-ejs');
+const path = require('path');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/rbac');
 
 //引入router
 const index = require('./routes/index');
-const users = require('./routes/users');
+const user = require('./routes/user');
+const role = require('./routes/role');
 
 // error handler
 onerror(app);
@@ -26,6 +32,15 @@ app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }));
 
+
+render(app, {
+    root: path.join(__dirname, 'views'),
+    layout: 'layout',
+    viewExt: 'ejs',
+    cache: false,
+    debug: true
+});
+
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
@@ -36,7 +51,8 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(index.routes(), index.allowedMethods());
-app.use(users.routes(), users.allowedMethods());
+app.use(user.routes(), user.allowedMethods());
+app.use(role.routes(), role.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {
