@@ -15,6 +15,7 @@ mongoose.connect('mongodb://localhost/rbac');
 const index = require('./routes/index');
 const user = require('./routes/user');
 const role = require('./routes/role');
+const access = require('./routes/access');
 
 // error handler
 onerror(app);
@@ -53,6 +54,7 @@ app.use(async (ctx, next) => {
 app.use(index.routes(), index.allowedMethods());
 app.use(user.routes(), user.allowedMethods());
 app.use(role.routes(), role.allowedMethods());
+app.use(access.routes(), access.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {

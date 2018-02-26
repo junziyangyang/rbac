@@ -51,12 +51,12 @@ router.post('/delete',async (ctx, next) =>{
 
 router.get('/update/:id', async (ctx, next) => {
   var user_id = ctx.params.id;
-  // var user = await User.findById(user_id).exec();
-  // var roles = await Role.find().exec();
-  var UserRole = await UserRole.find({}).exec();
-  console.log(UserRole)
+  var user = await User.findById(user_id).exec();
+  var roles = await Role.find().exec();
+  var userRole = await UserRole.findOne({user_id:user_id}).exec();
+  console.log(userRole);
 
-  // await ctx.render('user/info',{user: user, roles:roles, role_id : UserRole.role_id});
+  await ctx.render('user/info',{user: user, roles:roles, role_id: userRole.role_id});
 });
 
 router.get('/bar', function (ctx, next) {

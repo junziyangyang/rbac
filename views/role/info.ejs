@@ -27,10 +27,10 @@
                 <div class="layui-form-mid layui-word-aux">*必填项</div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">是否有效</label>
+                <label class="layui-form-label">状态</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="role[status]" value="0" title="否" <% if (role.status == 0){ %> checked <% } %>>
-                    <input type="radio" name="role[status]" value="1" title="是" <% if (role.status == 1){ %> checked <% } %>>
+                    <input type="radio" name="role[status]" value="0" title="禁用" <% if (role.status == 0){ %> checked <% } %>>
+                    <input type="radio" name="role[status]" value="1" title="启用" <% if (role.status == 1){ %> checked <% } %>>
                 </div>
             </div>
             <input type="hidden" name="role[_id]" class="layui-input" value="<%= role._id %>">

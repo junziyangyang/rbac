@@ -19,9 +19,9 @@
 
 <script type="text/html" id="statusTpl">
     {{#  if(d.status == 0 ){ }}
-    无效
+    禁用
     {{#  } else { }}
-    有效
+    启用
     {{#  } }}
 </script>
 
@@ -52,7 +52,7 @@
                 {field: 'name', title: '用户名', width: 200}
                 , {field: 'status', title: '状态', width: 100, sort: true, templet: '#statusTpl'}
                 , {field: 'created_time', title: '创建时间', sort: true}
-                , {fixed: 'right', width: 150, align: 'center', toolbar: '#toolsTpl'}
+                , {fixed: 'right', title: '操作', width: 150, align: 'center', toolbar: '#toolsTpl'}
             ]]
         });
 

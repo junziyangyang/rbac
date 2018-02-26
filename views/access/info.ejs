@@ -2,11 +2,11 @@
     <blockquote class="layui-elem-quote">
         <div class="layui-row">
             <div class="layui-col-md11">
-                <span class="layui-breadcrumb">
+               <span class="layui-breadcrumb">
                   <i class="layui-icon">&#xe68e</i>
                   <a href="/">首页 </a>
-                  <a href="/role">角色管理</a>
-                  <a><cite>角色添加</cite></a>
+                  <a href="/access">权限管理</a>
+                  <a><cite>权限修改</cite></a>
                 </span>
             </div>
             <div class="layui-col-md1">
@@ -19,24 +19,32 @@
     <div class="layui-elem-field">
         <form class="layui-form" action="" style="padding-top: 20px">
             <div class="layui-form-item">
-                <label class="layui-form-label">角色名</label>
+                <label class="layui-form-label">权限名</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="role[name]" required lay-verify="required" placeholder="请输入角色名"
-                           autocomplete="off" class="layui-input">
+                    <input type="text" name="access[name]" required lay-verify="required" placeholder="请输入权限名"
+                           autocomplete="off" class="layui-input" value="<%=access.name %>">
+                </div>
+                <div class="layui-form-mid layui-word-aux">*必填项</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">url</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="access[urls]" required lay-verify="required" placeholder="请输入url地址"
+                           autocomplete="off" class="layui-input" value="<%=access.urls %>">
                 </div>
                 <div class="layui-form-mid layui-word-aux">*必填项</div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">状态</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="role[status]" value="0" title="禁用">
-                    <input type="radio" name="role[status]" value="1" title="启用" checked>
+                    <input type="radio" name="access[status]" value="0" title="启用" <% if (access.status == 0){ %> checked <% } %>>
+                    <input type="radio" name="access[status]" value="1" title="禁用" <% if (access.status == 1){ %> checked <% } %>>
                 </div>
             </div>
+            <input type="hidden" name="access[_id]" class="layui-input" value="<%= access._id %>">
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </form>
@@ -51,7 +59,7 @@
         form.on('submit(submit)', function (data) {
             console.log(JSON.stringify(data.field));
             $.ajax({
-                url: '/role/save',
+                url: '/access/save',
                 type: "post",
                 data: data.field,
                 success: function (data) {
