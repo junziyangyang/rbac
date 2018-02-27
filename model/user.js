@@ -4,6 +4,8 @@ const objectId = schema.Types.ObjectId;
 const moment = require('moment');
 
 const UserSchema = new schema({
+    username: String,
+    password: String,
     name: String,      //姓名
     email: String,     //邮箱
     sex: {type: Number, default: 0},        // 0男 1女

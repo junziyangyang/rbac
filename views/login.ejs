@@ -1,6 +1,6 @@
 <html>
 <head>
-    <style type="text/css">
+    <style type="text/css">@charset "UTF-8";
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
         display: none !important;
     }
@@ -20,6 +20,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <title>成品商家端</title>
     <link rel="shortcut icon" type="image/ico" href="img/favicon.ico">
+    <link href="//cdn.bootcss.com/Swiper/3.4.1/css/swiper.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_uefxj7jl5dxqolxr.css">
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/login/login.css">
     <script type="text/javascript">
@@ -36,7 +38,8 @@
 </head>
 <body ng-app="login" ng-controller="loginCtrl" class="ng-scope">
 <div class="largeHeader" id="large-header" style="height: 359px;">
-    <div class="swiper-container swiper-container-horizontal swiper-container-3d swiper-container-flip show" ng-class="{true: 'show'}[isShow]">
+    <div class="swiper-container swiper-container-horizontal swiper-container-3d swiper-container-flip show"
+         ng-class="{true: 'show'}[isShow]">
         <div class="swiper-wrapper">
             <!--登录-->
             <div class="swiper-slide loginBox swiper-no-swiping swiper-slide-active"
@@ -46,8 +49,9 @@
                     <i class="eye rightEye" ng-class="{'eyeClose':eyeClose}"></i>
                     <img src="/login/mty.png">
                 </div>
-                <h3>成品家商城商家端</h3>
-                <form class="layui-form ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength ng-valid-usernameused ng-valid-minlength ng-valid-password ng-valid-usernameerror" ng-submit="submitLoginForm()" name="loginForm">
+                <h3>登陆页面</h3>
+                <form class="layui-form ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength ng-valid-usernameused ng-valid-minlength ng-valid-password ng-valid-usernameerror"
+                      ng-submit="submitLoginForm()" name="loginForm">
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <input type="text" ng-model="userName" checkusername=""
@@ -56,11 +60,12 @@
                                    placeholder="请输入用户名" autocomplete="new-password"
                                    class="layui-input ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength ng-valid-usernameused">
                             <i></i>
-                            <span class="errorTips ng-hide" ng-show="loginForm.username.$dirty &amp;&amp; loginForm.username.$invalid">
-                                <span ng-show="loginForm.username.$error.required">请输入用户名</span>
-                                <span ng-show="loginForm.username.$error.usernameused"
-                                      class="ng-hide">该用户名未被注册</span>
-                                </span>
+                            <span class="errorTips ng-hide"
+                                  ng-show="loginForm.username.$dirty &amp;&amp; loginForm.username.$invalid">
+  									<span ng-show="loginForm.username.$error.required">请输入用户名</span>
+									<span ng-show="loginForm.username.$error.usernameused"
+                                          class="ng-hide">该用户名未被注册</span>
+									</span>
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -84,9 +89,7 @@
                     </div>
                     <div class="layui-form-item loginBtnBox">
                         <div class="layui-input-block">
-                            <button type="submit" class="layui-btn"
-                                    ng-disabled="loginForm.username.$invalid || loginForm.password.$invalid"
-                                    disabled="disabled">登 录
+                            <button type="submit" class="layui-btn" ng-disabled="loginForm.username.$invalid || loginForm.password.$invalid" lay-submit lay-filter="submit" disabled="disabled">登 录
                             </button>
                         </div>
                     </div>
@@ -172,11 +175,14 @@
     <canvas id="demo-canvas" width="1920" height="359"></canvas>
 </div>
 
+<script src="//cdn.bootcss.com/Swiper/3.4.1/js/swiper.min.js"></script>
+<script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
 <script src="/layui/layui.all.js"></script>
 <script src="/login/TweenLite.min.js"></script>
 <script src="/login/EasePack.min.js"></script>
 <script src="/login/rAF.js"></script>
 <script src="/login/loginCanvasAnimate.js"></script>
 <script src="/login/login.js"></script>
+
 </body>
 </html>
