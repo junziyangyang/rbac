@@ -64,7 +64,7 @@
 
             console.log(obj)
             if (layEvent === 'delete') { //删除
-                layer.confirm('真的删除此角色么', {title: "提示"}, function (index) {
+                layer.confirm('确定删除此权限么', {title: "提示"}, function (index) {
                     //向服务端发送删除指令
                     $.ajax({
                         url: '/access/delete',
