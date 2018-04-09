@@ -23,7 +23,7 @@ onerror(app);
 
 // middlewares
 app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
+    enableTypes: ['json', 'form', 'text']
 }));
 
 app.use(json());
@@ -31,7 +31,7 @@ app.use(logger());
 app.use(require('koa-static')(__dirname + '/public'));
 
 app.use(views(__dirname + '/views', {
-  extension: 'ejs'
+    extension: 'ejs'
 }));
 
 
@@ -53,38 +53,43 @@ app.use(session(SESSION_CONFIG, app));
 
 // logger
 app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+    const start = new Date();
+    await next();
+    const ms = new Date() - start;
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
 // routes
 app.use(index.routes(), index.allowedMethods());
 // check session
 app.use(async (ctx, next) => {
-    if(ctx.session.user == null){
+    if (ctx.session.user == null
+    ) {
         ctx.redirect('/');
-    }else {
-        ctx.state.user = ctx.session.user;
-        render(app, {
-            root: path.join(__dirname, 'views'),
-            layout: 'layout',
-            viewExt: 'ejs',
-            cache: false,
-            debug: true
-        });
-        await next();
     }
-});
+    else {
+        ctx.state.user = ctx.session.user;
+        // render(app, {
+        //     root: path.join(__dirname, 'views'),
+        //     layout: 'layout',
+        //     viewExt: 'ejs',
+        //     cache: false,
+        //     debug: true
+        // });
+        await
+            next();
+    }
+})
+;
 app.use(user.routes(), user.allowedMethods());
 app.use(role.routes(), role.allowedMethods());
 app.use(access.routes(), access.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {
-  console.error('server error', err, ctx)
-});
+    console.error('server error', err, ctx)
+})
+;
 
 module.exports = app;
 

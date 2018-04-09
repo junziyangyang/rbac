@@ -3,14 +3,17 @@
         <div class="layui-row">
             <div class="layui-col-md11">
                 <span class="layui-breadcrumb">
-                  <a href="/">首页</a>
+                  <a href="#/">首页</a>
                   <a><cite>角色管理</cite></a>
                 </span>
             </div>
             <div class="layui-col-md1">
-                <button class="layui-btn" onclick="javascript:window.location.href='/role/add'">
+                <!--<button class="layui-btn" onclick="javascript:window.location.href='/role/add'">-->
+                <!--<i class="layui-icon">&#xe608;</i> 添加-->
+                <!--</button>-->
+                <a class="layui-btn" href='#/role/add'>
                     <i class="layui-icon">&#xe608;</i> 添加
-                </button>
+                </a>
             </div>
         </div>
     </blockquote>
@@ -86,8 +89,8 @@
                 });
             } else if (layEvent === 'edit') { //编辑
                 //do something
-                location.href = '/role/update/' + obj.data._id;
-
+                // location.href = '/role/update/' + obj.data._id;
+                loadUrl('/role/update/' + obj.data._id);
                 //同步更新缓存对应的值
                 // obj.update({
                 //     username: '123'

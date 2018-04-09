@@ -11,6 +11,7 @@ const UserSchema = new schema({
     sex: {type: Number, default: 0},        // 0男 1女
     is_admin: {type: Number, default: 0},    //是否是超级管理员 1表示是 0表示不是
     status: {type: Number, default: 1},      //状态 1：有效 0：无效
+    remark: String,
     updated_time: {type: String, default: '0000-00-00 00:00:00'},  //最后一次更新时间
     created_time: {type: String, default: '0000-00-00 00:00:00'}    //插入时间
 });

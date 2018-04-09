@@ -4,8 +4,8 @@
             <div class="layui-col-md11">
                 <span class="layui-breadcrumb">
                   <i class="layui-icon">&#xe68e</i>
-                  <a href="/">首页 </a>
-                  <a href="/user">用户管理</a>
+                  <a href="#/">首页 </a>
+                  <a href="#/user">用户管理</a>
                   <a><cite>用户添加</cite></a>
                 </span>
             </div>
@@ -82,7 +82,7 @@
         var $ = layui.jquery;
 
         $('select[name="role_id"]').val($('#hidden_role_id').val());
-        form.render('select')
+        form.render()
 
         //监听提交
         form.on('submit(submit)', function (data) {

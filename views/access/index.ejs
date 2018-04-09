@@ -3,14 +3,17 @@
         <div class="layui-row">
             <div class="layui-col-md11">
                 <span class="layui-breadcrumb">
-                  <a href="/">首页</a>
+                  <a href="#/">首页</a>
                   <a><cite>权限管理</cite></a>
                 </span>
             </div>
             <div class="layui-col-md1">
-                <button class="layui-btn" onclick="javascript:window.location.href='/access/add'">
+                <!--<button class="layui-btn" onclick="javascript:window.location.href='/access/add'">-->
+                    <!--<i class="layui-icon">&#xe608;</i> 添加-->
+                <!--</button> -->
+                <a class="layui-btn" href='#/access/add'>
                     <i class="layui-icon">&#xe608;</i> 添加
-                </button>
+                </a>
             </div>
         </div>
     </blockquote>
@@ -49,8 +52,8 @@
             , page: true //开启分页
             , even: true //开启隔行背景
             , cols: [[ //表头
-                {field: 'name', title: '用户名', width: 200}
-                , {field: 'urls', title: 'url',  width: 300}
+                {field: 'name', title: '权限名', width: 200}
+                , {field: 'urls', title: '权限地址',  width: 300}
                 , {field: 'status', title: '状态', width: 100, sort: true, templet: '#statusTpl'}
                 , {field: 'created_time', title: '创建时间', sort: true}
                 , {fixed: 'right', title:'操作', width: 150, align: 'center', toolbar: '#toolsTpl'}
@@ -84,8 +87,8 @@
                 });
             } else if (layEvent === 'edit') { //编辑
                 //do something
-                location.href = '/access/update/' + obj.data._id;
-
+                // location.href = '/access/update/' + obj.data._id;
+                loadUrl('/access/update/' + obj.data._id)
                 //同步更新缓存对应的值
                 // obj.update({
                 //     username: '123'

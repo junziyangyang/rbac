@@ -4,8 +4,8 @@
             <div class="layui-col-md11">
                 <span class="layui-breadcrumb">
                   <i class="layui-icon">&#xe68e</i>
-                  <a href="/">首页 </a>
-                  <a href="/access">权限管理</a>
+                  <a href="#/">首页 </a>
+                  <a href="#/access">权限管理</a>
                   <a><cite>权限添加</cite></a>
                 </span>
             </div>
@@ -54,7 +54,7 @@
     layui.use(['form', 'jquery'], function () {
         var form = layui.form;
         var $ = layui.jquery;
-
+        form.render();
         //监听提交
         form.on('submit(submit)', function (data) {
             console.log(JSON.stringify(data.field));

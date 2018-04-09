@@ -5,6 +5,8 @@ const moment = require('moment');
 
 const RoleSchema = new schema({
     name: String,     // 角色名称
+    type: Number,
+    remark: String,
     status: {type: Number, default: 1},      //状态 1：有效 0：无效
     updated_time: {type: String, default: '0000-00-00 00:00:00'},     //最后一次更新时间
     created_time: {type: String, default: '0000-00-00 00:00:00'}      //插入时间

@@ -37,18 +37,18 @@ var login = angular.module('login', [])
             var $ = layui.jquery;
 
             $.ajax({
-                url:'/login',
-                type:'post',
-                data:{
+                url: '/login',
+                type: 'post',
+                data: {
                     username: $scope.userName,
                     password: $scope.passWord
                 },
-                success:function (data) {
+                success: function (data) {
                     var code = Number(data.code);
                     if (code == 200) {
                         // localStorage.setItem("scUserName", $scope.userName);
                         // localStorage.setItem("scUserId", data.responseBody.id);
-                        window.location.href = '/user';
+                        window.location.href = '/';
                     } else if (code < 60000 && code >= 50000) { //业务级别错误
                         switch (code) {
                             case 50000: //用户名或密码错误
@@ -66,45 +66,45 @@ var login = angular.module('login', [])
                         console.log(data.responseHead.msg);
                     }
                 },
-                error:function (err) {
+                error: function (err) {
                     $scope.vCodeBtnkey = false;
                     layer.msg("发送失败");
                 }
             });
-        //     $http({
-        //         url: "/login",
-        //         method: "post",
-        //         params: {
-        //             username: $scope.userName,
-        //             password: $scope.passWord
-        //         },
-        //     }).success(function (data) {
-        //         var code = Number(data.responseHead.code);
-        //         if (code == 200) {
-        //             localStorage.setItem("scUserName", $scope.userName);
-        //             localStorage.setItem("scUserId", data.responseBody.id);
-        //             window.location.href = 'index.html';
-        //         } else if (code < 60000 && code >= 50000) { //业务级别错误
-        //             switch (code) {
-        //                 case 50000: //用户名或密码错误
-        //                     $scope.UsernameError = true;
-        //                     break;
-        //                 case 50019: //手机号未被注册
-        //                     $scope.UsernameUsed = true;
-        //                     break;
-        //                 default:
-        //                     layer.msg(data.responseHead.msg);
-        //                     break;
-        //             }
-        //
-        //         } else if (code < 50000) { //系统级别错误
-        //             console.log(data.responseHead.msg);
-        //         }
-        //
-        //     }).error(function (xhr, error) {
-        //         $scope.vCodeBtnkey = false;
-        //         layer.msg("发送失败");
-        //     });
+            //     $http({
+            //         url: "/login",
+            //         method: "post",
+            //         params: {
+            //             username: $scope.userName,
+            //             password: $scope.passWord
+            //         },
+            //     }).success(function (data) {
+            //         var code = Number(data.responseHead.code);
+            //         if (code == 200) {
+            //             localStorage.setItem("scUserName", $scope.userName);
+            //             localStorage.setItem("scUserId", data.responseBody.id);
+            //             window.location.href = 'index.ejs';
+            //         } else if (code < 60000 && code >= 50000) { //业务级别错误
+            //             switch (code) {
+            //                 case 50000: //用户名或密码错误
+            //                     $scope.UsernameError = true;
+            //                     break;
+            //                 case 50019: //手机号未被注册
+            //                     $scope.UsernameUsed = true;
+            //                     break;
+            //                 default:
+            //                     layer.msg(data.responseHead.msg);
+            //                     break;
+            //             }
+            //
+            //         } else if (code < 50000) { //系统级别错误
+            //             console.log(data.responseHead.msg);
+            //         }
+            //
+            //     }).error(function (xhr, error) {
+            //         $scope.vCodeBtnkey = false;
+            //         layer.msg("发送失败");
+            //     });
         };
         //发送验证码
         $scope.vCodeBtnWord = "获取验证码";

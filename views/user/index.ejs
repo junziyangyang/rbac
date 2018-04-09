@@ -6,14 +6,18 @@
                     <!--用户列表-->
                 <!--</div>-->
                 <span class="layui-breadcrumb">
-                  <a href="/">首页</a>
+                  <a href="#/">首页</a>
                   <a><cite>用户管理</cite></a>
                 </span>
             </div>
             <div class="layui-col-md1">
-                <button class="layui-btn" onclick="javascript:window.location.href='/user/add'">
+                <!--<button class="layui-btn" onclick="javascript:window.location.href='/user/add'">-->
+                <!--<button class="layui-btn" onclick="loadUrl('/user/add')">-->
+                    <!--<i class="layui-icon">&#xe608;</i> 添加-->
+                <!--</button>-->
+                <a class="layui-btn" href="#/user/add">
                     <i class="layui-icon">&#xe608;</i> 添加
-                </button>
+                </a>
             </div>
         </div>
     </blockquote>
@@ -107,7 +111,8 @@
                 });
             } else if (layEvent === 'edit') { //编辑
                 //do something
-                location.href = '/user/update/' + obj.data._id;
+                // location.href = '/user/update/' + obj.data._id;
+                loadUrl('/user/update/' + obj.data._id);
 
                 //同步更新缓存对应的值
                 // obj.update({

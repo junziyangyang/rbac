@@ -4,8 +4,8 @@
             <div class="layui-col-md11">
                <span class="layui-breadcrumb">
                   <i class="layui-icon">&#xe68e</i>
-                  <a href="/">首页 </a>
-                  <a href="/access">权限管理</a>
+                  <a href="#/">首页 </a>
+                  <a href="#/access">权限管理</a>
                   <a><cite>权限修改</cite></a>
                 </span>
             </div>
@@ -37,8 +37,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">状态</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="access[status]" value="0" title="启用" <% if (access.status == 0){ %> checked <% } %>>
-                    <input type="radio" name="access[status]" value="1" title="禁用" <% if (access.status == 1){ %> checked <% } %>>
+                    <input type="radio" name="access[status]" value="0" title="禁用" <% if (access.status == 0){ %> checked <% } %>>
+                    <input type="radio" name="access[status]" value="1" title="启用" <% if (access.status == 1){ %> checked <% } %>>
                 </div>
             </div>
             <input type="hidden" name="access[_id]" class="layui-input" value="<%= access._id %>">
@@ -54,7 +54,7 @@
     layui.use(['form', 'jquery'], function () {
         var form = layui.form;
         var $ = layui.jquery;
-
+        form.render();
         //监听提交
         form.on('submit(submit)', function (data) {
             console.log(JSON.stringify(data.field));
